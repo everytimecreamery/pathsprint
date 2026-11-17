@@ -1,0 +1,2555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PathSprint — Career Development & Mentorship for Students & Fresh Graduates</title>
+  <meta name="description" content="PathSprint is an online career development and mentorship community for Indian college students and fresh graduates. Live one-to-one guidance, real feedback, and honest development.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PathSprint — Career Development & Mentorship for Students & Fresh Graduates">
+  <meta property="og:description" content="Live one-to-one career guidance, real feedback, and honest development for college students and fresh graduates across India.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PathSprint">
+
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B3A5C'/%3E%3Cpath d='M8 24L16 6L24 24' stroke='%23F5A623' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='10' r='2.5' fill='%23F5A623'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Brand Palette */
+      --navy: #1B3A5C;
+      --navy-dark: #132A44;
+      --navy-deep: #0F263E;
+      --navy-light: #2A5080;
+      --navy-tint: rgba(27, 58, 92, 0.08);
+      --amber: #F5A623;
+      --amber-hover: #E09510;
+      --amber-light: #FFF3DC;
+      --amber-glow: rgba(245, 166, 35, 0.25);
+      --white: #FFFFFF;
+      --bg-alt: #F4F7FA;
+      --bg-alt-warm: #F8FAFC;
+      
+      /* Semantic Colors */
+      --success: #10B981;
+      --success-light: #ECFDF5;
+      --success-border: #A7F3D0;
+      --danger: #EF4444;
+      --danger-light: #FEF2F2;
+      --danger-border: #FECACA;
+      --info: #3B82F6;
+      --info-light: #EFF6FF;
+      --info-border: #BFDBFE;
+
+      /* Neutrals */
+      --text-primary: #1B2A3D;
+      --text-secondary: #4A5E74;
+      --text-muted: #7A8FA3;
+      --border: #DDE4EC;
+      --border-focus: #1B3A5C;
+
+      /* Shadows & Elevation */
+      --shadow-sm: 0 1px 3px rgba(27, 58, 92, 0.06);
+      --shadow-md: 0 4px 16px rgba(27, 58, 92, 0.08);
+      --shadow-lg: 0 12px 32px rgba(27, 58, 92, 0.12);
+      --shadow-card: 0 4px 20px rgba(27, 58, 92, 0.06);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-pill: 50px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --container: 1140px;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-alt);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--navy-light);
+      border-radius: 5px;
+      border: 2px solid var(--bg-alt);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--amber);
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Anchor Offset for Fixed Nav */
+    header[id], section[id], div[id] {
+      scroll-margin-top: 84px;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul, ol { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.2; color: var(--navy); }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 700; letter-spacing: -0.01em; }
+    h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 600; }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: var(--amber-light);
+      color: var(--navy);
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-subtext {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      transition: all var(--transition);
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .btn-sm {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--navy-dark);
+      box-shadow: 0 4px 14px rgba(245, 166, 35, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--amber-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--navy);
+      border: 2px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--navy);
+      background: var(--bg-alt);
+      transform: translateY(-2px);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--navy-dark);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover {
+      background: var(--amber);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.35);
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .btn:hover, .card:hover, .image-wrapper:hover { transform: none; }
+      .hero-content > *, .hero-figure { animation: none !important; }
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(221, 228, 236, 0.6);
+      transition: box-shadow var(--transition), background var(--transition);
+    }
+    .nav.scrolled {
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--navy);
+      transition: transform var(--transition);
+    }
+    .nav-logo:hover {
+      transform: scale(1.02);
+    }
+    .nav-logo svg { flex-shrink: 0; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+      position: relative;
+      padding: 6px 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--amber);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      color: var(--navy);
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 24px;
+      font-size: 0.88rem;
+    }
+
+    .nav-hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background var(--transition);
+    }
+    .nav-hamburger:hover { background: var(--bg-alt); }
+    .nav-hamburger:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    .hamburger-lines {
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+    .hamburger-lines span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      position: absolute;
+      left: 0;
+      transition: all var(--transition);
+    }
+    .hamburger-lines span:nth-child(1) { top: 0; }
+    .hamburger-lines span:nth-child(2) { top: 7px; }
+    .hamburger-lines span:nth-child(3) { top: 14px; }
+
+    .nav-hamburger[aria-expanded="true"] .hamburger-lines span:nth-child(1) {
+      top: 7px; transform: rotate(45deg);
+    }
+    .nav-hamburger[aria-expanded="true"] .hamburger-lines span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-hamburger[aria-expanded="true"] .hamburger-lines span:nth-child(3) {
+      top: 7px; transform: rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      padding: 24px;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 0;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--bg-alt);
+    }
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--navy); }
+    .mobile-menu .btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* ===== IMAGE FIGURE STYLES ===== */
+    .image-figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(27, 58, 92, 0.16);
+      box-shadow: 0 12px 32px rgba(27, 58, 92, 0.08), 0 0 24px var(--amber-glow);
+      background: var(--bg-alt);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .image-wrapper:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(27, 58, 92, 0.12), 0 0 32px rgba(245, 166, 35, 0.28);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-caption {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 140px 0 80px;
+      position: relative;
+      overflow: hidden;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(13, 148, 136, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(245, 166, 35, 0.06) 0%, transparent 45%),
+        var(--white);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    /* Staged Hero Animations */
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * {
+      animation: heroFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    .hero-badge-wrap { animation-delay: 0.1s; }
+    .hero h1 { animation-delay: 0.2s; }
+    .hero-subheadline { animation-delay: 0.35s; }
+    .hero-buttons { animation-delay: 0.5s; }
+    .hero-honest { animation-delay: 0.65s; }
+    .hero-figure { animation: heroFadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.4s; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      background: var(--amber-light);
+      color: var(--navy);
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--amber);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      margin: 0 0 20px;
+    }
+
+    .hero-subheadline {
+      margin: 0 0 32px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .hero-honest {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .hero-figure {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      transition: all var(--transition);
+      height: 100%;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-alt);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: background var(--transition);
+    }
+    .card:hover .card-icon {
+      background: var(--amber-light);
+    }
+    .card-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--navy);
+    }
+
+    .card h3 { margin-bottom: 10px; }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    .card ul {
+      color: var(--text-secondary);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+    .card ul li {
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+    }
+
+    /* ===== GRIDS ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* ===== SECTION STYLES ===== */
+    .section { padding: 88px 0; }
+    .section-alt { background: var(--bg-alt); }
+
+    /* ===== WHY US ===== */
+    .why-body {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 48px;
+      color: var(--text-secondary);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    /* ===== TRANSFORMATION ===== */
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .transformation-content {
+      text-align: left;
+    }
+
+    .transformation-content h2 {
+      margin-bottom: 20px;
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    }
+
+    .transformation-content p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 16px);
+      right: calc(12.5% + 16px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--amber), var(--navy-light));
+      z-index: 0;
+    }
+
+    .timeline-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-number {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--navy);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition);
+    }
+    .timeline-step:hover .timeline-number {
+      background: var(--amber);
+      color: var(--white);
+      transform: scale(1.08);
+    }
+
+    .timeline-step h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .timeline-step p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ===== MENTORSHIP ===== */
+    .mentors-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .mentors-content h2 {
+      margin-bottom: 20px;
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    }
+
+    .mentors-body {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .mentor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      margin-bottom: 36px;
+    }
+    .mentor-tag {
+      padding: 8px 20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--navy);
+      transition: all var(--transition);
+    }
+    .mentor-tag:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    /* ===== HONESTY STRIP ===== */
+    .honesty-strip {
+      background: var(--bg-alt);
+      padding: 64px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .honesty-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--navy);
+      max-width: 700px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .honesty-quote::before {
+      content: '\201C';
+      font-size: 4rem;
+      color: var(--amber);
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+    .honesty-small {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ===== ASSESSMENT SECTION ===== */
+    .assessment-card-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .assessment-notice {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--info-light);
+      border: 1px solid var(--info-border);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      color: var(--navy);
+    }
+    .assessment-notice .notice-icon {
+      color: var(--info);
+      flex-shrink: 0;
+    }
+    .assessment-notice p {
+      margin: 2px 0 0;
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .assessment-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      padding: 40px;
+      position: relative;
+    }
+
+    /* Progress Bar */
+    .form-progress-bar-container {
+      margin-bottom: 32px;
+    }
+    .form-progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--bg-alt);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .form-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy-light), var(--amber));
+      transition: width 0.4s ease;
+    }
+    .form-step-indicators {
+      display: flex;
+      justify-content: space-between;
+    }
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .step-indicator .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+    .step-indicator.active {
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .step-indicator.active .step-num {
+      background: var(--amber);
+      color: var(--navy-dark);
+      border-color: var(--amber);
+    }
+    .step-indicator.completed .step-num {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .step-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--bg-alt);
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .form-group label .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+    .form-group label .optional {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(27, 58, 92, 0.12);
+    }
+    .form-input.error, .form-select.error {
+      border-color: var(--danger);
+      background: var(--danger-light);
+    }
+
+    .phone-input-wrap {
+      display: flex;
+      align-items: stretch;
+    }
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      background: var(--bg-alt);
+      border: 1.5px solid var(--border);
+      border-right: none;
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .phone-input-wrap .form-input {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .field-hint {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .error-msg {
+      font-size: 0.82rem;
+      color: var(--danger);
+      margin-top: 6px;
+      min-height: 16px;
+    }
+
+    /* Radio Cards */
+    .radio-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-options.radio-inline {
+      flex-direction: row;
+      gap: 16px;
+    }
+    .radio-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .radio-card:hover {
+      border-color: var(--navy-light);
+      background: var(--bg-alt);
+    }
+    .radio-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .radio-custom {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .radio-custom::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      opacity: 0;
+      transform: scale(0);
+      transition: all var(--transition);
+    }
+    .radio-card input[type="radio"]:checked + .radio-custom {
+      border-color: var(--amber);
+    }
+    .radio-card input[type="radio"]:checked + .radio-custom::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .radio-card:has(input[type="radio"]:checked) {
+      border-color: var(--amber);
+      background: var(--amber-light);
+    }
+    .radio-card:has(input[type="radio"]:focus-visible) {
+      outline: 3px solid var(--amber);
+      outline-offset: 2px;
+    }
+    .radio-card-compact {
+      flex: 1;
+    }
+    .radio-text {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Actions */
+    .form-step-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--bg-alt);
+    }
+    .form-step-actions .btn-back {
+      margin-right: auto;
+    }
+
+    /* Spinner */
+    .spinner-svg {
+      width: 20px;
+      height: 20px;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* State Panels */
+    .assessment-state-panel {
+      padding: 32px 16px;
+      text-align: center;
+    }
+    .state-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .state-icon svg { width: 32px; height: 32px; }
+    .success-icon {
+      background: var(--success-light);
+      color: var(--success);
+      border: 2px solid var(--success-border);
+    }
+    .error-icon {
+      background: var(--danger-light);
+      color: var(--danger);
+      border: 2px solid var(--danger-border);
+    }
+    .assessment-state-panel h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+    .assessment-state-panel p {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 28px;
+      font-size: 0.98rem;
+    }
+    .state-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== FAQ ACCORDION ===== */
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      text-align: left;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--navy);
+      transition: color var(--transition);
+      gap: 16px;
+    }
+    .faq-trigger:hover, .faq-trigger:focus-visible {
+      color: var(--navy-light);
+    }
+    .faq-trigger:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .faq-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform var(--transition);
+      color: var(--text-muted);
+    }
+    .faq-item[data-open="true"] .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--amber);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .faq-content-inner {
+      padding: 0 0 22px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+    .faq-content-inner a {
+      color: var(--amber-hover);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .faq-content-inner a:hover { color: var(--navy); }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      background: 
+        radial-gradient(circle at 85% 15%, rgba(13, 148, 136, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(245, 166, 35, 0.15) 0%, transparent 45%),
+        linear-gradient(135deg, #132A44 0%, #1B3A5C 50%, #0F263E 100%);
+      padding: 90px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta h2 {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .final-cta p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 48px 0 32px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .footer-top {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .footer-tagline {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.65);
+      transition: color var(--transition);
+    }
+    .footer-link:hover, .footer-link:focus-visible { color: var(--amber); }
+    .footer-link:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .footer-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .footer-legal {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .timeline { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .timeline::before { display: none; }
+      .hero-grid { gap: 40px; }
+      .transformation-grid { gap: 40px; }
+      .mentors-grid { gap: 40px; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-content {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .hero-figure .image-wrapper {
+        max-height: 420px;
+        margin: 0 auto;
+      }
+
+      .transformation-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+      .transformation-content {
+        text-align: center;
+      }
+      .transformation-image .image-wrapper {
+        max-height: 420px;
+        margin: 0 auto;
+      }
+
+      .mentors-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .mentors-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .mentor-tags {
+        justify-content: center;
+      }
+      .mentors-image .image-wrapper {
+        max-height: 420px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 110px 0 60px; }
+      .section { padding: 64px 0; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; gap: 32px; }
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .hero-buttons .btn { width: 100%; }
+      .final-cta { padding: 60px 0; }
+      .honesty-quote::before { left: 0; }
+      .assessment-card { padding: 24px 18px; }
+      .form-step-indicators { display: none; }
+      .radio-options.radio-inline { flex-direction: column; gap: 10px; }
+    }
+
+    @media (max-width: 400px) {
+      .container { padding: 0 16px; }
+      .card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SECTION: NAVIGATION -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo" aria-label="PathSprint home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="6" fill="#1B3A5C"/>
+        <path d="M8 24L16 6L24 24" stroke="#F5A623" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="10" r="2.5" fill="#F5A623"/>
+      </svg>
+      PathSprint
+    </a>
+
+    <div class="nav-links">
+      <a href="#why">Why Us</a>
+      <a href="#services">Services</a>
+      <a href="#transformation">Transformation</a>
+      <a href="#how">How It Works</a>
+      <a href="#mentors">Mentors</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <a href="#assessment" class="btn btn-primary nav-cta nav-cta-desktop">Free Assessment</a>
+
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <div class="hamburger-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" role="menu">
+    <a href="#why" role="menuitem">Why Us</a>
+    <a href="#services" role="menuitem">Services</a>
+    <a href="#transformation" role="menuitem">Transformation</a>
+    <a href="#how" role="menuitem">How It Works</a>
+    <a href="#mentors" role="menuitem">Mentors</a>
+    <a href="#assessment" role="menuitem">Assessment</a>
+    <a href="#faq" role="menuitem">FAQ</a>
+    <a href="#assessment" class="btn btn-primary" role="menuitem">Free Assessment</a>
+  </div>
+</nav>
+
+
+<!-- SECTION: HERO -->
+<header class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge-wrap">
+          <span class="hero-badge">Live 1:1 · Fully Online · Across India</span>
+        </div>
+
+        <h1>From campus confusion<br>to career confidence.</h1>
+
+        <p class="hero-subheadline">PathSprint is an online career development and mentorship community for college students and fresh graduates. Live one-to-one guidance, real feedback, and honest development — no fake placement promises.</p>
+
+        <div class="hero-buttons">
+          <a href="#assessment" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            Take the Free Career Assessment
+          </a>
+          <a href="#" class="btn btn-secondary" data-link="whatsappUrl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        <p class="hero-honest">Now enrolling our first pilot cohort.</p>
+      </div>
+
+      <div class="hero-figure">
+        <figure class="image-figure">
+          <div class="image-wrapper">
+            <img src="assets/career-directions.jpg"
+                 alt="Illustration of a student choosing between career directions in finance, business, technology, marketing and data"
+                 width="800"
+                 height="1067"
+                 fetchpriority="high">
+          </div>
+          <figcaption class="image-caption">Illustrative image.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- SECTION: WHY US -->
+<section class="section section-alt" id="why">
+  <div class="container">
+    <h2 class="section-heading reveal">Your degree taught you theory.<br>Nobody taught you the rest.</h2>
+
+    <p class="why-body reveal">How to introduce yourself in an interview. How to write a resume that gets read. How to explain your project to a recruiter. How to choose a career that actually fits you. PathSprint exists to close that gap — with personal attention, practical training and honest feedback.</p>
+
+    <div class="grid-4 reveal">
+      <!-- Pain Point Card 1 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <h3>200 applications, zero replies</h3>
+        <p>Your resume never reaches a human.</p>
+      </div>
+
+      <!-- Pain Point Card 2 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <h3>I know the answer but can't say it</h3>
+        <p>You freeze when speaking in interviews.</p>
+      </div>
+
+      <!-- Pain Point Card 3 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <h3>My degree is my only proof</h3>
+        <p>No projects, no portfolio, nothing to show.</p>
+      </div>
+
+      <!-- Pain Point Card 4 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Everyone has an opinion</h3>
+        <p>Nobody explains what the actual job roles involve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-heading reveal">Everything you need to become career-ready.</h2>
+
+    <div class="grid-2 reveal">
+      <!-- Service Card 1 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <h3>Career Clarity & Direction</h3>
+        <ul>
+          <li>Understand industries and real job roles</li>
+          <li>Personal assessment plus a one-to-one clarity session</li>
+          <li>A roadmap built around your strengths</li>
+        </ul>
+      </div>
+
+      <!-- Service Card 2 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Professional Identity</h3>
+        <ul>
+          <li>ATS-friendly resume creation</li>
+          <li>Complete LinkedIn profile optimization</li>
+          <li>Portfolio development that shows real proof of work</li>
+        </ul>
+      </div>
+
+      <!-- Service Card 3 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3>Communication & Interviews</h3>
+        <ul>
+          <li>Live one-to-one communication training</li>
+          <li>Realistic mock interviews with structured feedback</li>
+          <li>Professional conversation and workplace etiquette</li>
+        </ul>
+      </div>
+
+      <!-- Service Card 4 -->
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+        </div>
+        <h3>Projects & Aptitude</h3>
+        <ul>
+          <li>Guidance choosing and planning domain projects</li>
+          <li>Help documenting and presenting your work</li>
+          <li>Aptitude test practice for fresher hiring rounds</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: TRANSFORMATION -->
+<section class="section" id="transformation">
+  <div class="container">
+    <div class="transformation-grid">
+      <div class="transformation-image reveal">
+        <figure class="image-figure">
+          <div class="image-wrapper">
+            <img src="assets/confidence-transformation.jpg"
+                 alt="Illustrative split image of a nervous student before communication practice and a confident student after"
+                 width="800"
+                 height="1067"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+          <figcaption class="image-caption">Illustrative image.</figcaption>
+        </figure>
+      </div>
+
+      <div class="transformation-content reveal">
+        <h2>The difference is not knowledge. It is practice.</h2>
+        <p>You already understand more than you can say. Live one-to-one speaking practice, honest feedback and realistic mock interviews turn what you know into what you can perform under pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: HOW IT WORKS -->
+<section class="section section-alt" id="how">
+  <div class="container">
+    <h2 class="section-heading reveal">Your journey from confused to career-ready.</h2>
+
+    <div class="timeline reveal">
+      <!-- Step 1 -->
+      <div class="timeline-step">
+        <div class="timeline-number">01</div>
+        <h3>Assess</h3>
+        <p>Join the community and take a free career assessment of your background, interests and goals.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="timeline-step">
+        <div class="timeline-number">02</div>
+        <h3>Build</h3>
+        <p>Develop your professional identity: resume, LinkedIn and portfolio, with personal feedback.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="timeline-step">
+        <div class="timeline-number">03</div>
+        <h3>Practice</h3>
+        <p>Live communication sessions, mock interviews and project guidance until you can perform under pressure.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="timeline-step">
+        <div class="timeline-number">04</div>
+        <h3>Grow</h3>
+        <p>Book one-to-one industry mentor sessions when you need expert insight, and keep developing inside the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: MENTORSHIP -->
+<section class="section" id="mentors">
+  <div class="container">
+    <div class="mentors-grid">
+      <div class="mentors-content reveal">
+        <h2>Talk to someone who actually does the job.</h2>
+
+        <p class="mentors-body">Sometimes you don't need training — you need one honest conversation with a working professional. Book a dedicated one-to-one mentor session and ask what the role really involves, which skills matter, and whether the path fits you. Sessions are booked separately, based on your need.</p>
+
+        <div class="mentor-tags">
+          <span class="mentor-tag">Finance & FinTech</span>
+          <span class="mentor-tag">Accounting</span>
+          <span class="mentor-tag">Data Analytics</span>
+          <span class="mentor-tag">IT</span>
+          <span class="mentor-tag">Software Development</span>
+          <span class="mentor-tag">Business Management</span>
+          <span class="mentor-tag">Business Analysis</span>
+          <span class="mentor-tag">Marketing</span>
+          <span class="mentor-tag">Human Resources</span>
+          <span class="mentor-tag">Consulting</span>
+        </div>
+
+        <div>
+          <a href="#" class="btn btn-primary" data-link="whatsappUrl">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            Ask About Mentor Sessions
+          </a>
+        </div>
+      </div>
+
+      <div class="mentors-image reveal">
+        <figure class="image-figure">
+          <div class="image-wrapper">
+            <img src="assets/mentor-session.jpg"
+                 alt="Illustrative image of a student in a live one-to-one video mentorship session"
+                 width="800"
+                 height="1067"
+                 loading="lazy"
+                 decoding="async">
+          </div>
+          <figcaption class="image-caption">Illustrative image.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: HONESTY STRIP -->
+<div class="honesty-strip">
+  <div class="container">
+    <p class="honesty-quote reveal">We don't promise jobs. We build clarity, confidence and capability.</p>
+    <p class="honesty-small reveal">Employment depends on your effort, qualifications and market conditions. What we commit to is our full attention, honest feedback and genuine development.</p>
+  </div>
+</div>
+
+
+<!-- SECTION: ASSESSMENT -->
+<section class="section section-alt" id="assessment">
+  <div class="container">
+    <div class="reveal" style="text-align: center;">
+      <span class="section-badge">Free Career Gap Analysis</span>
+      <h2 class="section-heading">Find your 3 biggest career gaps — free.</h2>
+      <p class="section-subtext">10 questions, 2 minutes. Within 24 hours you get a personal WhatsApp message naming your gaps and your fastest next step. No spam. No job guarantees.</p>
+    </div>
+
+    <div class="assessment-card-wrapper reveal">
+      <!-- Main Form Container -->
+      <div class="assessment-card" id="assessment-container">
+        <!-- Progress Bar -->
+        <div class="form-progress-bar-container" aria-label="Assessment progress">
+          <div class="form-progress-track">
+            <div class="form-progress-fill" id="form-progress-fill" style="width: 33.33%;"></div>
+          </div>
+          <div class="form-step-indicators">
+            <div class="step-indicator active" id="indicator-1">
+              <span class="step-num">1</span>
+              <span class="step-label">About you</span>
+            </div>
+            <div class="step-indicator" id="indicator-2">
+              <span class="step-num">2</span>
+              <span class="step-label">Your situation</span>
+            </div>
+            <div class="step-indicator" id="indicator-3">
+              <span class="step-num">3</span>
+              <span class="step-label">Next step</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="career-assessment-form" novalidate>
+          <!-- Hidden Honeypot Input -->
+          <input type="text" name="website" id="field-website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;pointer-events:none;" aria-hidden="true">
+
+          <!-- Step 1: About you -->
+          <div class="form-step" id="form-step-1">
+            <h3 class="step-heading">Step 1: About you</h3>
+            
+            <!-- 1. Name -->
+            <div class="form-group" id="group-name">
+              <label for="field-name">Your Full Name <span class="required">*</span></label>
+              <input type="text" id="field-name" name="name" class="form-input" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+              <div class="error-msg" id="err-name" aria-live="polite"></div>
+            </div>
+
+            <!-- 2. WhatsApp -->
+            <div class="form-group" id="group-whatsapp">
+              <label for="field-whatsapp">WhatsApp Number <span class="required">*</span></label>
+              <div class="phone-input-wrap">
+                <span class="phone-prefix">+91</span>
+                <input type="tel" id="field-whatsapp" name="whatsapp" class="form-input" placeholder="9876543210" required autocomplete="tel" maxlength="15">
+              </div>
+              <small class="field-hint">We'll send your personal 3-gap diagnosis directly to this number.</small>
+              <div class="error-msg" id="err-whatsapp" aria-live="polite"></div>
+            </div>
+
+            <!-- 3. Stage -->
+            <div class="form-group" id="group-stage">
+              <label for="field-stage">Current College / Career Stage <span class="required">*</span></label>
+              <select id="field-stage" name="stage" class="form-select" required>
+                <option value="">Select your current stage...</option>
+                <option value="1st/2nd year">1st/2nd year</option>
+                <option value="3rd year">3rd year</option>
+                <option value="Final year">Final year</option>
+                <option value="Graduated job hunting">Graduated job hunting</option>
+                <option value="Working want switch">Working want switch</option>
+              </select>
+              <div class="error-msg" id="err-stage" aria-live="polite"></div>
+            </div>
+
+            <!-- 4. Context -->
+            <div class="form-group" id="group-context">
+              <label for="field-context">College, Degree & City <span class="required">*</span></label>
+              <input type="text" id="field-context" name="context" class="form-input" placeholder="e.g. B.Com at Loyola College, Chennai" required>
+              <div class="error-msg" id="err-context" aria-live="polite"></div>
+            </div>
+
+            <div class="form-step-actions">
+              <button type="button" class="btn btn-primary btn-next" id="btn-to-step-2">
+                Continue to Step 2
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Your situation -->
+          <div class="form-step" id="form-step-2" style="display: none;">
+            <h3 class="step-heading">Step 2: Your situation</h3>
+
+            <!-- 5. Direction -->
+            <div class="form-group" id="group-direction">
+              <label for="field-direction">Career Direction You're Aiming For <span class="required">*</span></label>
+              <select id="field-direction" name="direction" class="form-select" required>
+                <option value="">Select target career track...</option>
+                <option value="Finance & Accounting">Finance & Accounting</option>
+                <option value="IT & Software">IT & Software</option>
+                <option value="Data & Analytics">Data & Analytics</option>
+                <option value="Marketing">Marketing</option>
+                <option value="HR & Business">HR & Business</option>
+                <option value="Consulting">Consulting</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+              <div class="error-msg" id="err-direction" aria-live="polite"></div>
+            </div>
+
+            <!-- 6. Struggle (radio) -->
+            <div class="form-group" id="group-struggle">
+              <label>Your Biggest Career Hurdle Right Now <span class="required">*</span></label>
+              <div class="radio-options" role="radiogroup" aria-required="true">
+                <label class="radio-card">
+                  <input type="radio" name="struggle" value="No interview calls">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">No interview calls</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="struggle" value="Freeze speaking English">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Freeze speaking English</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="struggle" value="Confused about direction">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Confused about direction</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="struggle" value="No projects or proof">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">No projects or proof</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="struggle" value="Don't know how to present myself">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Don't know how to present myself</span>
+                </label>
+              </div>
+              <div class="error-msg" id="err-struggle" aria-live="polite"></div>
+            </div>
+
+            <!-- 7. Resume -->
+            <div class="form-group" id="group-resume">
+              <label for="field-resume">Resume Status <span class="required">*</span></label>
+              <select id="field-resume" name="resume" class="form-select" required>
+                <option value="">Select resume status...</option>
+                <option value="Ready and sending">Ready and sending</option>
+                <option value="Rough draft">Rough draft</option>
+                <option value="Don't have one">Don't have one</option>
+              </select>
+              <div class="error-msg" id="err-resume" aria-live="polite"></div>
+            </div>
+
+            <!-- 8. LinkedIn -->
+            <div class="form-group" id="group-linkedin">
+              <label for="field-linkedin">LinkedIn Profile Status <span class="required">*</span></label>
+              <select id="field-linkedin" name="linkedin" class="form-select" required>
+                <option value="">Select LinkedIn status...</option>
+                <option value="No profile">No profile</option>
+                <option value="Mostly empty">Mostly empty</option>
+                <option value="Active">Active</option>
+              </select>
+              <div class="error-msg" id="err-linkedin" aria-live="polite"></div>
+            </div>
+
+            <div class="form-step-actions">
+              <button type="button" class="btn btn-secondary btn-back" id="btn-back-to-step-1">Back</button>
+              <button type="button" class="btn btn-primary btn-next" id="btn-to-step-3">
+                Continue to Final Step
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Next step -->
+          <div class="form-step" id="form-step-3" style="display: none;">
+            <h3 class="step-heading">Step 3: Next step</h3>
+
+            <!-- 9. Target (optional) -->
+            <div class="form-group" id="group-target">
+              <label for="field-target">Target Role or Dream Companies <span class="optional">(Optional)</span></label>
+              <input type="text" id="field-target" name="target" class="form-input" placeholder="e.g. Financial Analyst at Deloitte, Product Associate">
+            </div>
+
+            <!-- 10. Call (radio) -->
+            <div class="form-group" id="group-call">
+              <label>Free 10-minute feedback call on WhatsApp? <span class="required">*</span></label>
+              <div class="radio-options radio-inline" role="radiogroup" aria-required="true">
+                <label class="radio-card radio-card-compact">
+                  <input type="radio" name="call" value="Yes">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">Yes, I'd like a call</span>
+                </label>
+                <label class="radio-card radio-card-compact">
+                  <input type="radio" name="call" value="No">
+                  <span class="radio-custom"></span>
+                  <span class="radio-text">No, text message is fine</span>
+                </label>
+              </div>
+              <div class="error-msg" id="err-call" aria-live="polite"></div>
+            </div>
+
+            <div class="form-step-actions">
+              <button type="button" class="btn btn-secondary btn-back" id="btn-back-to-step-2">Back</button>
+              <button type="submit" class="btn btn-primary" id="btn-submit-assessment">
+                <span class="btn-text">Submit My Assessment</span>
+                <span class="btn-spinner" style="display: none;" aria-hidden="true">
+                  <svg class="spinner-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success Panel -->
+        <div id="assessment-success-panel" class="assessment-state-panel" style="display: none;" role="region" aria-live="polite">
+          <div class="state-icon success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3>Done. Check WhatsApp within 24 hours — your personal 3-gap diagnosis is on its way.</h3>
+          <p>We've received your assessment. Our team will analyze your responses and send an honest, personalized roadmap naming your 3 biggest career gaps and fastest next action.</p>
+          <div class="state-actions">
+            <a href="#" class="btn btn-primary" data-link="whatsappUrl" id="btn-success-whatsapp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+              Open WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Error Panel -->
+        <div id="assessment-error-panel" class="assessment-state-panel" style="display: none;" role="region" aria-live="assertive">
+          <div class="state-icon error-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3>Something broke on our side.</h3>
+          <p>Something broke on our side. Retry, or message us directly on WhatsApp.</p>
+          <div class="state-actions">
+            <button type="button" class="btn btn-primary" id="btn-retry-assessment">Retry</button>
+            <a href="#" class="btn btn-secondary" data-link="whatsappUrl">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-heading reveal">What to know before you start.</h2>
+
+    <div class="faq-list reveal" role="list">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item" data-open="false" role="listitem">
+        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-1">
+          <span>Who is PathSprint for?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-content" id="faq-answer-1" role="region">
+          <div class="faq-content-inner">College students, final-year students and fresh graduates across India, in any career domain.</div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="faq-item" data-open="false" role="listitem">
+        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-2">
+          <span>Do you guarantee jobs or placements?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-content" id="faq-answer-2" role="region">
+          <div class="faq-content-inner">No. We build clarity, confidence and capability. Outcomes depend on your own effort and market conditions, and we will never pretend otherwise.</div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="faq-item" data-open="false" role="listitem">
+        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-3">
+          <span>Are the sessions live or recorded?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-content" id="faq-answer-3" role="region">
+          <div class="faq-content-inner">Live and one-to-one. Your resume, your voice, your questions — not generic video content.</div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="faq-item" data-open="false" role="listitem">
+        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-4">
+          <span>Which career domains do you cover?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-content" id="faq-answer-4" role="region">
+          <div class="faq-content-inner">Finance, IT, Data Analytics, Marketing, HR, Business, Consulting and more, with mentors from each field.</div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="faq-item" data-open="false" role="listitem">
+        <button class="faq-trigger" aria-expanded="false" aria-controls="faq-answer-5">
+          <span>How do I start?</span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-content" id="faq-answer-5" role="region">
+          <div class="faq-content-inner">Take the <a href="#assessment">free career assessment</a>, understand your gaps, and choose the support you need.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="reveal">Your career won't build itself. Start today.</h2>
+    <p class="reveal">Take the free assessment and find out exactly where you stand — and what to do next.</p>
+    <div class="reveal">
+      <a href="#assessment" class="btn btn-white">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Take the Free Career Assessment
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION: FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <p class="footer-tagline">PathSprint — Build Skills. Build Confidence. Build Your Future.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#" class="footer-link" data-link="email" aria-label="Email PathSprint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span data-text="email">Email</span>
+      </a>
+      <a href="#" class="footer-link" data-link="whatsappUrl" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a href="#" class="footer-link" data-link="instagramUrl" aria-label="Follow on Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="#" class="footer-link" data-link="linkedinUrl" aria-label="Connect on LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+
+    <div class="footer-legal">
+      <p>PathSprint provides career guidance, training and mentorship. We do not guarantee employment, job offers or placements.</p>
+      <p style="margin-top: 8px;">&copy; 2026 PathSprint</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+/* ===== CONFIGURATION — Replace values before going live ===== */
+const CONFIG = {
+  assessmentEndpointUrl: "REPLACE_ME", // Google Apps Script Web App /exec URL
+  whatsappUrl:           "https://wa.me/919363934034?text=Hi%20PathSprint%2C%20I%20want%20to%20know%20about%20career%20guidance",
+  email:                 "REPLACE_ME",
+  instagramUrl:          "REPLACE_ME",
+  linkedinUrl:           "REPLACE_ME"
+};
+
+/* ===== LINK BINDING ===== */
+(function bindLinks() {
+  document.querySelectorAll('[data-link]').forEach(function(el) {
+    var key = el.getAttribute('data-link');
+    var url = CONFIG[key] || '#';
+
+    if (key === 'email' && url !== 'REPLACE_ME') {
+      el.setAttribute('href', 'mailto:' + url);
+      var textSpan = el.querySelector('[data-text="email"]');
+      if (textSpan) textSpan.textContent = url;
+    } else if (url && url !== 'REPLACE_ME') {
+      el.setAttribute('href', url);
+    } else {
+      el.setAttribute('href', '#');
+    }
+  });
+})();
+
+
+/* ===== SCROLL REVEAL (IntersectionObserver) ===== */
+(function initReveal() {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+
+/* ===== STICKY NAV & SCROLLSPY ===== */
+(function initNavScrollAndSpy() {
+  var nav = document.querySelector('.nav');
+  var sections = document.querySelectorAll('header[id], section[id]');
+  var navLinks = document.querySelectorAll('.nav-links a');
+
+  function onScroll() {
+    // Nav shadow toggle
+    if (window.scrollY > 10) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+
+    // Scrollspy active state
+    var scrollPos = window.scrollY + 120;
+    var currentId = '';
+
+    sections.forEach(function(sec) {
+      var top = sec.offsetTop;
+      var height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(function(link) {
+      link.classList.remove('active');
+      if (currentId && link.getAttribute('href') === '#' + currentId) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+
+/* ===== MOBILE MENU WITH FOCUS TRAP & ESCAPE ===== */
+(function initMobileMenu() {
+  var hamburger = document.querySelector('.nav-hamburger');
+  var menu = document.getElementById('mobile-menu');
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+    document.removeEventListener('keydown', trapFocus);
+  }
+
+  function openMenu() {
+    menu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    hamburger.setAttribute('aria-label', 'Close menu');
+    document.addEventListener('keydown', trapFocus);
+    
+    // Focus first link in mobile menu
+    var firstLink = menu.querySelector('a, button');
+    if (firstLink) firstLink.focus();
+  }
+
+  function trapFocus(e) {
+    if (e.key === 'Escape') {
+      closeMenu();
+      hamburger.focus();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      var focusables = menu.querySelectorAll('a[href], button');
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  hamburger.addEventListener('click', function() {
+    if (menu.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  menu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+})();
+
+
+/* ===== FAQ ACCORDION ===== */
+(function initAccordion() {
+  var items = document.querySelectorAll('.faq-item');
+
+  items.forEach(function(item) {
+    var trigger = item.querySelector('.faq-trigger');
+    var content = item.querySelector('.faq-content');
+
+    function toggle() {
+      var isOpen = item.getAttribute('data-open') === 'true';
+
+      items.forEach(function(otherItem) {
+        if (otherItem !== item) {
+          otherItem.setAttribute('data-open', 'false');
+          otherItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          otherItem.querySelector('.faq-content').style.maxHeight = '0';
+        }
+      });
+
+      if (isOpen) {
+        item.setAttribute('data-open', 'false');
+        trigger.setAttribute('aria-expanded', 'false');
+        content.style.maxHeight = '0';
+      } else {
+        item.setAttribute('data-open', 'true');
+        trigger.setAttribute('aria-expanded', 'true');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+
+    trigger.addEventListener('click', toggle);
+
+    trigger.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+})();
+
+
+/* ===== MULTI-STEP CAREER ASSESSMENT FORM ===== */
+(function initAssessmentForm() {
+  var form = document.getElementById('career-assessment-form');
+  if (!form) return;
+
+  var currentStep = 1;
+  var isSubmitting = false;
+
+  var step1 = document.getElementById('form-step-1');
+  var step2 = document.getElementById('form-step-2');
+  var step3 = document.getElementById('form-step-3');
+  var progressFill = document.getElementById('form-progress-fill');
+
+  var indicator1 = document.getElementById('indicator-1');
+  var indicator2 = document.getElementById('indicator-2');
+  var indicator3 = document.getElementById('indicator-3');
+
+  var successPanel = document.getElementById('assessment-success-panel');
+  var errorPanel = document.getElementById('assessment-error-panel');
+  var submitBtn = document.getElementById('btn-submit-assessment');
+  var retryBtn = document.getElementById('btn-retry-assessment');
+
+  function cleanPhone(raw) {
+    var cleaned = (raw || '').replace(/[\s\-\(\)\.]/g, '');
+    if (cleaned.indexOf('+91') === 0) {
+      cleaned = cleaned.substring(3);
+    } else if (cleaned.indexOf('91') === 0 && cleaned.length === 12) {
+      cleaned = cleaned.substring(2);
+    } else if (cleaned.indexOf('0') === 0 && cleaned.length === 11) {
+      cleaned = cleaned.substring(1);
+    }
+    return /^[6-9]\d{9}$/.test(cleaned) ? cleaned : null;
+  }
+
+  function setError(fieldId, errId, msg) {
+    var field = document.getElementById(fieldId);
+    var errEl = document.getElementById(errId);
+    if (field) {
+      field.classList.add('error');
+      field.setAttribute('aria-invalid', 'true');
+    }
+    if (errEl) errEl.textContent = msg;
+  }
+
+  function clearError(fieldId, errId) {
+    var field = document.getElementById(fieldId);
+    var errEl = document.getElementById(errId);
+    if (field) {
+      field.classList.remove('error');
+      field.removeAttribute('aria-invalid');
+    }
+    if (errEl) errEl.textContent = '';
+  }
+
+  function setRadioGroupError(groupSelector, errId, msg) {
+    var errEl = document.getElementById(errId);
+    if (errEl) errEl.textContent = msg;
+  }
+
+  function clearRadioGroupError(errId) {
+    var errEl = document.getElementById(errId);
+    if (errEl) errEl.textContent = '';
+  }
+
+  function validateStep1() {
+    var valid = true;
+
+    // 1. Name
+    var nameVal = (document.getElementById('field-name').value || '').trim();
+    if (!nameVal || nameVal.length < 2) {
+      setError('field-name', 'err-name', 'Please enter your full name (at least 2 letters).');
+      valid = false;
+    } else {
+      clearError('field-name', 'err-name');
+    }
+
+    // 2. WhatsApp
+    var rawPhone = (document.getElementById('field-whatsapp').value || '').trim();
+    var validPhone = cleanPhone(rawPhone);
+    if (!validPhone) {
+      setError('field-whatsapp', 'err-whatsapp', 'Please enter a valid 10-digit Indian WhatsApp number.');
+      valid = false;
+    } else {
+      clearError('field-whatsapp', 'err-whatsapp');
+    }
+
+    // 3. Stage
+    var stageVal = document.getElementById('field-stage').value;
+    if (!stageVal) {
+      setError('field-stage', 'err-stage', 'Please select your current educational or career stage.');
+      valid = false;
+    } else {
+      clearError('field-stage', 'err-stage');
+    }
+
+    // 4. Context
+    var contextVal = (document.getElementById('field-context').value || '').trim();
+    if (!contextVal || contextVal.length < 3) {
+      setError('field-context', 'err-context', 'Please enter your college name, degree, and city.');
+      valid = false;
+    } else {
+      clearError('field-context', 'err-context');
+    }
+
+    return valid;
+  }
+
+  function validateStep2() {
+    var valid = true;
+
+    // 5. Direction
+    var dirVal = document.getElementById('field-direction').value;
+    if (!dirVal) {
+      setError('field-direction', 'err-direction', 'Please select your target career direction.');
+      valid = false;
+    } else {
+      clearError('field-direction', 'err-direction');
+    }
+
+    // 6. Struggle
+    var struggleRadio = form.querySelector('input[name="struggle"]:checked');
+    if (!struggleRadio) {
+      setRadioGroupError('struggle', 'err-struggle', 'Please select your biggest career struggle right now.');
+      valid = false;
+    } else {
+      clearRadioGroupError('err-struggle');
+    }
+
+    // 7. Resume
+    var resumeVal = document.getElementById('field-resume').value;
+    if (!resumeVal) {
+      setError('field-resume', 'err-resume', 'Please select your resume status.');
+      valid = false;
+    } else {
+      clearError('field-resume', 'err-resume');
+    }
+
+    // 8. LinkedIn
+    var linkedinVal = document.getElementById('field-linkedin').value;
+    if (!linkedinVal) {
+      setError('field-linkedin', 'err-linkedin', 'Please select your LinkedIn status.');
+      valid = false;
+    } else {
+      clearError('field-linkedin', 'err-linkedin');
+    }
+
+    return valid;
+  }
+
+  function validateStep3() {
+    var valid = true;
+
+    // 10. Call (Yes / No)
+    var callRadio = form.querySelector('input[name="call"]:checked');
+    if (!callRadio) {
+      setRadioGroupError('call', 'err-call', 'Please indicate if you would like a free 10-minute feedback call.');
+      valid = false;
+    } else {
+      clearRadioGroupError('err-call');
+    }
+
+    return valid;
+  }
+
+  function showStep(step) {
+    currentStep = step;
+    step1.style.display = step === 1 ? 'block' : 'none';
+    step2.style.display = step === 2 ? 'block' : 'none';
+    step3.style.display = step === 3 ? 'block' : 'none';
+
+    if (step === 1) {
+      progressFill.style.width = '33.33%';
+      indicator1.className = 'step-indicator active';
+      indicator2.className = 'step-indicator';
+      indicator3.className = 'step-indicator';
+    } else if (step === 2) {
+      progressFill.style.width = '66.66%';
+      indicator1.className = 'step-indicator completed';
+      indicator2.className = 'step-indicator active';
+      indicator3.className = 'step-indicator';
+    } else if (step === 3) {
+      progressFill.style.width = '100%';
+      indicator1.className = 'step-indicator completed';
+      indicator2.className = 'step-indicator completed';
+      indicator3.className = 'step-indicator active';
+    }
+  }
+
+  // Next / Back Button Handlers
+  document.getElementById('btn-to-step-2').addEventListener('click', function() {
+    if (validateStep1()) {
+      showStep(2);
+      step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  document.getElementById('btn-back-to-step-1').addEventListener('click', function() {
+    showStep(1);
+    step1.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  document.getElementById('btn-to-step-3').addEventListener('click', function() {
+    if (validateStep2()) {
+      showStep(3);
+      step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  document.getElementById('btn-back-to-step-2').addEventListener('click', function() {
+    showStep(2);
+    step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // Clear errors on change
+  ['field-name', 'field-whatsapp', 'field-stage', 'field-context'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', function() { clearError(id, id.replace('field-', 'err-')); });
+      el.addEventListener('change', function() { clearError(id, id.replace('field-', 'err-')); });
+    }
+  });
+
+  ['field-direction', 'field-resume', 'field-linkedin'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('change', function() { clearError(id, id.replace('field-', 'err-')); });
+  });
+
+  form.querySelectorAll('input[name="struggle"]').forEach(function(r) {
+    r.addEventListener('change', function() { clearRadioGroupError('err-struggle'); });
+  });
+  form.querySelectorAll('input[name="call"]').forEach(function(r) {
+    r.addEventListener('change', function() { clearRadioGroupError('err-call'); });
+  });
+
+  // Form Submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    if (!validateStep1()) { showStep(1); return; }
+    if (!validateStep2()) { showStep(2); return; }
+    if (!validateStep3()) { return; }
+
+    // Check honeypot
+    var honeypot = (document.getElementById('field-website').value || '').trim();
+
+    // Guard: if endpoint is unfilled, do NOT fake success
+    if (!CONFIG.assessmentEndpointUrl || CONFIG.assessmentEndpointUrl === 'REPLACE_ME') {
+      form.style.display = 'none';
+      document.querySelector('.form-progress-bar-container').style.display = 'none';
+      errorPanel.style.display = 'block';
+      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+
+    var cleanWhatsApp = cleanPhone(document.getElementById('field-whatsapp').value);
+    var struggleRadio = form.querySelector('input[name="struggle"]:checked');
+    var callRadio = form.querySelector('input[name="call"]:checked');
+
+    var payload = {
+      name: (document.getElementById('field-name').value || '').trim(),
+      whatsapp: cleanWhatsApp,
+      stage: document.getElementById('field-stage').value,
+      context: (document.getElementById('field-context').value || '').trim(),
+      direction: document.getElementById('field-direction').value,
+      struggle: struggleRadio ? struggleRadio.value : '',
+      resume: document.getElementById('field-resume').value,
+      linkedin: document.getElementById('field-linkedin').value,
+      target: (document.getElementById('field-target').value || '').trim(),
+      call: callRadio ? callRadio.value : '',
+      website: honeypot,
+      source: window.location.hostname || 'direct',
+      ts: new Date().toISOString()
+    };
+
+    // Submitting State
+    isSubmitting = true;
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.btn-text').style.display = 'none';
+    submitBtn.querySelector('.btn-spinner').style.display = 'inline-flex';
+
+    fetch(CONFIG.assessmentEndpointUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      if (data && data.ok) {
+        // Success
+        form.style.display = 'none';
+        document.querySelector('.form-progress-bar-container').style.display = 'none';
+        successPanel.style.display = 'block';
+        successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        throw new Error(data && data.error ? data.error : 'Submission rejected');
+      }
+    })
+    .catch(function(err) {
+      console.error('Submission failed:', err);
+      form.style.display = 'none';
+      document.querySelector('.form-progress-bar-container').style.display = 'none';
+      errorPanel.style.display = 'block';
+      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    })
+    .finally(function() {
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.btn-text').style.display = 'inline';
+      submitBtn.querySelector('.btn-spinner').style.display = 'none';
+    });
+  });
+
+  // Retry from Error Panel (restoring all entered values)
+  if (retryBtn) {
+    retryBtn.addEventListener('click', function() {
+      errorPanel.style.display = 'none';
+      form.style.display = 'block';
+      document.querySelector('.form-progress-bar-container').style.display = 'block';
+      showStep(3); // return to last step
+      step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
