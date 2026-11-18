@@ -1894,9 +1894,10 @@
           </div>
           <h3>Something broke on our side.</h3>
           <p>Something broke on our side. Retry, or message us directly on WhatsApp.</p>
+          <div id="assessment-debug-info" style="display: none; font-family: monospace; font-size: 0.75rem; color: #EF4444; margin: 12px auto; max-width: 480px; background: #FEF2F2; padding: 8px 12px; border-radius: 6px; word-break: break-all; text-align: left; white-space: pre-wrap;"></div>
           <div class="state-actions">
             <button type="button" class="btn btn-primary" id="btn-retry-assessment">Retry</button>
-            <a href="#" class="btn btn-secondary" data-link="whatsappUrl">Chat on WhatsApp</a>
+            <a href="#" class="btn btn-secondary" data-link="whatsappUrl" id="btn-error-whatsapp">Chat on WhatsApp</a>
           </div>
         </div>
       </div>
@@ -2465,7 +2466,8 @@ const CONFIG = {
     if (!validateStep3()) { return; }
 
     // Check honeypot (bot trap): if filled, silently show success panel without sending
-    if (honeypot) {
+    var honeypotVal = (document.getElementById('field-website') ? document.getElementById('field-website').value : '').trim();
+    if (honeypotVal) {
       form.style.display = 'none';
       document.querySelector('.form-progress-bar-container').style.display = 'none';
       successPanel.style.display = 'block';
@@ -2489,8 +2491,54 @@ const CONFIG = {
       target: (document.getElementById('field-target').value || '').trim() || null,
       wants_call: callRadio ? (callRadio.value === 'Yes') : false,
       source: window.location.hostname || 'direct',
-      client_ts: new Date().toISOString()
+      client_ts: new Date().toISOString(),
+      honeypot: null
     };
+
+    function buildFallbackWhatsAppUrl(p) {
+      var baseUrl = (CONFIG.whatsappUrl || 'https://wa.me/919363934034').split('?')[0];
+      var answers = [
+        'Assessment (site error fallback):',
+        '1. Name: ' + (p.name || ''),
+        '2. WhatsApp: ' + (p.whatsapp || ''),
+        '3. Stage: ' + (p.stage || ''),
+        '4. College / Degree / City: ' + (p.college_degree_city || ''),
+        '5. Direction: ' + (p.direction || ''),
+        '6. Struggle: ' + (p.struggle || ''),
+        '7. Resume: ' + (p.resume_status || ''),
+        '8. LinkedIn: ' + (p.linkedin_status || ''),
+        '9. Target: ' + (p.target || 'None'),
+        '10. Free Diagnostic Call: ' + (p.wants_call ? 'Yes' : 'No')
+      ];
+      return baseUrl + '?text=' + encodeURIComponent(answers.join('\n'));
+    }
+
+    function handleFailure(status, body) {
+      console.error('[assessment]', status, body);
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var isDebug = urlParams.get('debug') === '1';
+      var debugEl = document.getElementById('assessment-debug-info');
+      if (debugEl) {
+        if (isDebug) {
+          debugEl.textContent = 'HTTP ' + status + ':\n' + (typeof body === 'string' ? body : JSON.stringify(body, null, 2));
+          debugEl.style.display = 'block';
+        } else {
+          debugEl.style.display = 'none';
+          debugEl.textContent = '';
+        }
+      }
+
+      var waBtn = document.getElementById('btn-error-whatsapp');
+      if (waBtn) {
+        waBtn.setAttribute('href', buildFallbackWhatsAppUrl(payload));
+      }
+
+      form.style.display = 'none';
+      document.querySelector('.form-progress-bar-container').style.display = 'none';
+      errorPanel.style.display = 'block';
+      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 
     // Submitting State
     isSubmitting = true;
@@ -2511,21 +2559,19 @@ const CONFIG = {
     })
     .then(function(res) {
       if (res.status === 201) {
-        // Success
+        // Only HTTP 201 shows the success panel
         form.style.display = 'none';
         document.querySelector('.form-progress-bar-container').style.display = 'none';
         successPanel.style.display = 'block';
         successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        throw new Error('HTTP ' + res.status);
+        return res.text().then(function(text) {
+          handleFailure(res.status, text);
+        });
       }
     })
     .catch(function(err) {
-      console.error('Submission failed:', err);
-      form.style.display = 'none';
-      document.querySelector('.form-progress-bar-container').style.display = 'none';
-      errorPanel.style.display = 'block';
-      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      handleFailure(0, err && err.message ? err.message : String(err));
     })
     .finally(function() {
       isSubmitting = false;
