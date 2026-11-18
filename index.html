@@ -243,7 +243,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
-      .btn:hover, .card:hover, .card.is-spotlight, .image-wrapper:hover { transform: none; box-shadow: none; }
+      .btn:hover, .card:hover, .image-wrapper:hover { transform: none; }
       .hero-content > *, .hero-figure { animation: none !important; }
     }
 
@@ -539,8 +539,7 @@
       transition: all var(--transition);
       height: 100%;
     }
-    .card:hover,
-    .card.is-spotlight {
+    .card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
       border-color: transparent;
@@ -557,8 +556,7 @@
       margin-bottom: 20px;
       transition: background var(--transition);
     }
-    .card:hover .card-icon,
-    .card.is-spotlight .card-icon {
+    .card:hover .card-icon {
       background: var(--amber-light);
     }
     .card-icon svg {
@@ -2024,11 +2022,12 @@
 <script>
 /* ===== CONFIGURATION — Replace values before going live ===== */
 const CONFIG = {
-  assessmentEndpointUrl: "REPLACE_ME", // Google Apps Script Web App /exec URL
-  whatsappUrl:           "https://wa.me/919363934034?text=Hi%20PathSprint%2C%20I%20want%20to%20know%20about%20career%20guidance",
-  email:                 "REPLACE_ME",
-  instagramUrl:          "REPLACE_ME",
-  linkedinUrl:           "REPLACE_ME"
+  supabaseUrl:     "https://oenadsuuijlxrvooozth.supabase.co",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lbmFkc3V1aWpseHJ2b29venRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMTA3OTMsImV4cCI6MjExMDU4Njc5M30.pmICyKLx3SnfHdhWXiazZ7Tp34HCrdXkgOe0UIRTweo",
+  whatsappUrl:     "https://wa.me/919363934034?text=Hi%20PathSprint%2C%20I%20want%20to%20know%20about%20career%20guidance",
+  email:           "contact@pathsprint.com",
+  instagramUrl:    "https://instagram.com/pathsprint",
+  linkedinUrl:     "https://linkedin.com/company/pathsprint"
 };
 
 /* ===== LINK BINDING ===== */
@@ -2217,176 +2216,6 @@ const CONFIG = {
         toggle();
       }
     });
-  });
-})();
-
-
-/* ===== AUTOMATIC CARD SPOTLIGHT CYCLE ===== */
-(function initCardSpotlight() {
-  var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reducedMotionQuery.matches) {
-    return;
-  }
-
-  var DWELL_MS = 2000;
-  var RESUME_DELAY_MS = 1500;
-
-  var gridConfigs = [
-    { section: '#why', selector: '.grid-4' },
-    { section: '#services', selector: '.grid-2' }
-  ];
-
-  gridConfigs.forEach(function(cfg) {
-    var sectionEl = document.querySelector(cfg.section);
-    if (!sectionEl) return;
-    var gridEl = sectionEl.querySelector(cfg.selector);
-    if (!gridEl) return;
-
-    var cards = Array.prototype.slice.call(gridEl.querySelectorAll('.card'));
-    if (cards.length === 0) return;
-
-    var currentIndex = -1;
-    var timer = null;
-    var resumeTimer = null;
-    var isHovered = false;
-    var isIntersecting = false;
-
-    function clearSpotlight() {
-      cards.forEach(function(card) {
-        card.classList.remove('is-spotlight');
-      });
-    }
-
-    function setSpotlight(index) {
-      clearSpotlight();
-      if (index >= 0 && index < cards.length) {
-        cards[index].classList.add('is-spotlight');
-      }
-    }
-
-    function clearAllTimers() {
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
-      }
-      if (resumeTimer) {
-        clearTimeout(resumeTimer);
-        resumeTimer = null;
-      }
-    }
-
-    function canRun() {
-      return isIntersecting && !isHovered && !document.hidden && !reducedMotionQuery.matches;
-    }
-
-    function scheduleNext() {
-      clearAllTimers();
-      if (!canRun()) {
-        clearSpotlight();
-        return;
-      }
-
-      timer = setTimeout(function() {
-        timer = null;
-        if (!canRun()) {
-          clearSpotlight();
-          return;
-        }
-        currentIndex = (currentIndex + 1) % cards.length;
-        setSpotlight(currentIndex);
-        scheduleNext();
-      }, DWELL_MS);
-    }
-
-    function startOrResume() {
-      if (!canRun()) return;
-
-      if (currentIndex < 0) {
-        currentIndex = 0;
-      }
-      setSpotlight(currentIndex);
-      scheduleNext();
-    }
-
-    function pause() {
-      clearAllTimers();
-      clearSpotlight();
-    }
-
-    // Pointer events on cards & grid
-    gridEl.addEventListener('pointerenter', function(e) {
-      if (e.pointerType === 'touch') return;
-      isHovered = true;
-      clearAllTimers();
-      clearSpotlight();
-    });
-
-    cards.forEach(function(card, idx) {
-      card.addEventListener('pointerenter', function(e) {
-        if (e.pointerType === 'touch') return;
-        isHovered = true;
-        clearAllTimers();
-        clearSpotlight();
-        currentIndex = idx;
-      });
-    });
-
-    gridEl.addEventListener('pointerleave', function(e) {
-      if (e.pointerType === 'touch') return;
-      isHovered = false;
-      clearAllTimers();
-      clearSpotlight();
-
-      if (!canRun()) return;
-
-      resumeTimer = setTimeout(function() {
-        resumeTimer = null;
-        if (!canRun()) return;
-        currentIndex = (currentIndex + 1) % cards.length;
-        setSpotlight(currentIndex);
-        scheduleNext();
-      }, RESUME_DELAY_MS);
-    });
-
-    // Viewport visibility via IntersectionObserver
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.target === gridEl) {
-          isIntersecting = entry.isIntersecting;
-          if (isIntersecting) {
-            startOrResume();
-          } else {
-            pause();
-          }
-        }
-      });
-    }, {
-      threshold: 0.15
-    });
-
-    observer.observe(gridEl);
-
-    // Tab visibility (document.hidden)
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        pause();
-      } else {
-        if (isIntersecting && !isHovered) {
-          startOrResume();
-        }
-      }
-    });
-
-    // Reduced motion change listener
-    if (reducedMotionQuery.addEventListener) {
-      reducedMotionQuery.addEventListener('change', function(e) {
-        if (e.matches) {
-          pause();
-        } else {
-          startOrResume();
-        }
-      });
-    }
   });
 })();
 
@@ -2635,15 +2464,12 @@ const CONFIG = {
     if (!validateStep2()) { showStep(2); return; }
     if (!validateStep3()) { return; }
 
-    // Check honeypot
-    var honeypot = (document.getElementById('field-website').value || '').trim();
-
-    // Guard: if endpoint is unfilled, do NOT fake success
-    if (!CONFIG.assessmentEndpointUrl || CONFIG.assessmentEndpointUrl === 'REPLACE_ME') {
+    // Check honeypot (bot trap): if filled, silently show success panel without sending
+    if (honeypot) {
       form.style.display = 'none';
       document.querySelector('.form-progress-bar-container').style.display = 'none';
-      errorPanel.style.display = 'block';
-      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      successPanel.style.display = 'block';
+      successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
@@ -2655,44 +2481,43 @@ const CONFIG = {
       name: (document.getElementById('field-name').value || '').trim(),
       whatsapp: cleanWhatsApp,
       stage: document.getElementById('field-stage').value,
-      context: (document.getElementById('field-context').value || '').trim(),
+      college_degree_city: (document.getElementById('field-context').value || '').trim(),
       direction: document.getElementById('field-direction').value,
       struggle: struggleRadio ? struggleRadio.value : '',
-      resume: document.getElementById('field-resume').value,
-      linkedin: document.getElementById('field-linkedin').value,
-      target: (document.getElementById('field-target').value || '').trim(),
-      call: callRadio ? callRadio.value : '',
-      website: honeypot,
+      resume_status: document.getElementById('field-resume').value,
+      linkedin_status: document.getElementById('field-linkedin').value,
+      target: (document.getElementById('field-target').value || '').trim() || null,
+      wants_call: callRadio ? (callRadio.value === 'Yes') : false,
       source: window.location.hostname || 'direct',
-      ts: new Date().toISOString()
+      client_ts: new Date().toISOString()
     };
 
     // Submitting State
     isSubmitting = true;
     submitBtn.disabled = true;
+    submitBtn.setAttribute('aria-busy', 'true');
     submitBtn.querySelector('.btn-text').style.display = 'none';
     submitBtn.querySelector('.btn-spinner').style.display = 'inline-flex';
 
-    fetch(CONFIG.assessmentEndpointUrl, {
+    fetch(CONFIG.supabaseUrl + '/rest/v1/assessments', {
       method: 'POST',
       headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
+        'apikey': CONFIG.supabaseAnonKey,
+        'Authorization': 'Bearer ' + CONFIG.supabaseAnonKey,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
       },
       body: JSON.stringify(payload)
     })
     .then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    })
-    .then(function(data) {
-      if (data && data.ok) {
+      if (res.status === 201) {
         // Success
         form.style.display = 'none';
         document.querySelector('.form-progress-bar-container').style.display = 'none';
         successPanel.style.display = 'block';
         successPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        throw new Error(data && data.error ? data.error : 'Submission rejected');
+        throw new Error('HTTP ' + res.status);
       }
     })
     .catch(function(err) {
@@ -2705,6 +2530,7 @@ const CONFIG = {
     .finally(function() {
       isSubmitting = false;
       submitBtn.disabled = false;
+      submitBtn.removeAttribute('aria-busy');
       submitBtn.querySelector('.btn-text').style.display = 'inline';
       submitBtn.querySelector('.btn-spinner').style.display = 'none';
     });
