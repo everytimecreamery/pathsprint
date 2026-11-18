@@ -390,23 +390,29 @@
       font-weight: 500;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--bg-alt);
-      text-align: left;
     }
-    .mobile-menu a:not(.btn):hover, 
-    .mobile-menu a:not(.btn):focus-visible { 
-      color: var(--navy); 
+    .mobile-menu a:not(.btn):hover,
+    .mobile-menu a:not(.btn):focus-visible {
+      color: var(--navy);
     }
     .mobile-menu a.btn,
     .mobile-menu .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       width: 100%;
       margin-top: 20px;
-      padding: 12px 24px;
+      padding: 12px 1.5rem;
       font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
       border-bottom: none;
+      color: var(--navy-dark);
+    }
+    .mobile-menu a.btn:hover,
+    .mobile-menu a.btn:focus-visible {
+      color: var(--navy-dark);
+      background: var(--amber-hover);
     }
 
     /* ===== IMAGE FIGURE STYLES ===== */
