@@ -383,19 +383,30 @@
       z-index: 999;
     }
     .mobile-menu.open { display: block; }
-    .mobile-menu a {
+    .mobile-menu a:not(.btn) {
       display: block;
       padding: 14px 0;
       font-size: 1.05rem;
       font-weight: 500;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--bg-alt);
+      text-align: left;
     }
-    .mobile-menu a:last-of-type { border-bottom: none; }
-    .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--navy); }
+    .mobile-menu a:not(.btn):hover, 
+    .mobile-menu a:not(.btn):focus-visible { 
+      color: var(--navy); 
+    }
+    .mobile-menu a.btn,
     .mobile-menu .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       width: 100%;
       margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      border-bottom: none;
     }
 
     /* ===== IMAGE FIGURE STYLES ===== */
