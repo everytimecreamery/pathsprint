@@ -390,6 +390,7 @@
       font-weight: 500;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--bg-alt);
+      text-align: left;
     }
     .mobile-menu a:not(.btn):hover,
     .mobile-menu a:not(.btn):focus-visible {
@@ -397,22 +398,23 @@
     }
     .mobile-menu a.btn,
     .mobile-menu .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px 1.5rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-align: center;
-      border-bottom: none;
-      color: var(--navy-dark);
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: 100% !important;
+      margin-top: 20px !important;
+      padding: 14px 28px !important;
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      border-bottom: none !important;
+      color: var(--navy-dark) !important;
+      box-sizing: border-box !important;
     }
     .mobile-menu a.btn:hover,
     .mobile-menu a.btn:focus-visible {
-      color: var(--navy-dark);
-      background: var(--amber-hover);
+      color: var(--navy-dark) !important;
+      background: var(--amber-hover) !important;
     }
 
     /* ===== IMAGE FIGURE STYLES ===== */
@@ -1394,7 +1396,7 @@
     <a href="#mentors" role="menuitem">Mentors</a>
     <a href="#assessment" role="menuitem">Assessment</a>
     <a href="#faq" role="menuitem">FAQ</a>
-    <a href="#assessment" class="btn btn-primary" role="menuitem">Free Assessment</a>
+    <a href="#assessment" class="btn btn-primary" role="menuitem" style="display: flex; align-items: center; justify-content: center; text-align: center; width: 100%; padding: 14px 28px; box-sizing: border-box; margin-top: 20px;">Free Assessment</a>
   </div>
 </nav>
 
