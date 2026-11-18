@@ -243,7 +243,7 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
-      .btn:hover, .card:hover, .image-wrapper:hover { transform: none; }
+      .btn:hover, .card:is(:hover, .is-active), .timeline-step:is(:hover, .is-active) .timeline-number, .image-wrapper:hover { transform: none; }
       .hero-content > *, .hero-figure { animation: none !important; }
     }
 
@@ -383,38 +383,19 @@
       z-index: 999;
     }
     .mobile-menu.open { display: block; }
-    .mobile-menu a:not(.btn) {
+    .mobile-menu a {
       display: block;
       padding: 14px 0;
       font-size: 1.05rem;
       font-weight: 500;
       color: var(--text-secondary);
       border-bottom: 1px solid var(--bg-alt);
-      text-align: left;
     }
-    .mobile-menu a:not(.btn):hover,
-    .mobile-menu a:not(.btn):focus-visible {
-      color: var(--navy);
-    }
-    .mobile-menu a.btn,
+    .mobile-menu a:last-of-type { border-bottom: none; }
+    .mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--navy); }
     .mobile-menu .btn {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      width: 100% !important;
-      margin-top: 20px !important;
-      padding: 14px 28px !important;
-      font-size: 0.95rem !important;
-      font-weight: 600 !important;
-      border-bottom: none !important;
-      color: var(--navy-dark) !important;
-      box-sizing: border-box !important;
-    }
-    .mobile-menu a.btn:hover,
-    .mobile-menu a.btn:focus-visible {
-      color: var(--navy-dark) !important;
-      background: var(--amber-hover) !important;
+      width: 100%;
+      margin-top: 20px;
     }
 
     /* ===== IMAGE FIGURE STYLES ===== */
@@ -558,7 +539,7 @@
       transition: all var(--transition);
       height: 100%;
     }
-    .card:hover {
+    .card:is(:hover, .is-active) {
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
       border-color: transparent;
@@ -575,7 +556,7 @@
       margin-bottom: 20px;
       transition: background var(--transition);
     }
-    .card:hover .card-icon {
+    .card:is(:hover, .is-active) .card-icon {
       background: var(--amber-light);
     }
     .card-icon svg {
@@ -703,7 +684,7 @@
       box-shadow: var(--shadow-md);
       transition: all var(--transition);
     }
-    .timeline-step:hover .timeline-number {
+    .timeline-step:is(:hover, .is-active) .timeline-number {
       background: var(--amber);
       color: var(--white);
       transform: scale(1.08);
@@ -1396,7 +1377,7 @@
     <a href="#mentors" role="menuitem">Mentors</a>
     <a href="#assessment" role="menuitem">Assessment</a>
     <a href="#faq" role="menuitem">FAQ</a>
-    <a href="#assessment" class="btn btn-primary" role="menuitem" style="display: flex; align-items: center; justify-content: center; text-align: center; width: 100%; padding: 14px 28px; box-sizing: border-box; margin-top: 20px;">Free Assessment</a>
+    <a href="#assessment" class="btn btn-primary" role="menuitem">Free Assessment</a>
   </div>
 </nav>
 
@@ -1452,9 +1433,9 @@
 
     <p class="why-body reveal">How to introduce yourself in an interview. How to write a resume that gets read. How to explain your project to a recruiter. How to choose a career that actually fits you. PathSprint exists to close that gap — with personal attention, practical training and honest feedback.</p>
 
-    <div class="grid-4 reveal">
+    <div class="grid-4 reveal" data-spotlight-group>
       <!-- Pain Point Card 1 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
         </div>
@@ -1463,7 +1444,7 @@
       </div>
 
       <!-- Pain Point Card 2 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </div>
@@ -1472,7 +1453,7 @@
       </div>
 
       <!-- Pain Point Card 3 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
         </div>
@@ -1481,7 +1462,7 @@
       </div>
 
       <!-- Pain Point Card 4 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
@@ -1498,9 +1479,9 @@
   <div class="container">
     <h2 class="section-heading reveal">Everything you need to become career-ready.</h2>
 
-    <div class="grid-2 reveal">
+    <div class="grid-2 reveal" data-spotlight-group>
       <!-- Service Card 1 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </div>
@@ -1513,7 +1494,7 @@
       </div>
 
       <!-- Service Card 2 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
@@ -1526,7 +1507,7 @@
       </div>
 
       <!-- Service Card 3 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         </div>
@@ -1539,7 +1520,7 @@
       </div>
 
       <!-- Service Card 4 -->
-      <div class="card">
+      <div class="card" data-spotlight>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
         </div>
@@ -1587,30 +1568,30 @@
   <div class="container">
     <h2 class="section-heading reveal">Your journey from confused to career-ready.</h2>
 
-    <div class="timeline reveal">
+    <div class="timeline reveal" data-spotlight-group>
       <!-- Step 1 -->
-      <div class="timeline-step">
+      <div class="timeline-step" data-spotlight>
         <div class="timeline-number">01</div>
         <h3>Assess</h3>
         <p>Join the community and take a free career assessment of your background, interests and goals.</p>
       </div>
 
       <!-- Step 2 -->
-      <div class="timeline-step">
+      <div class="timeline-step" data-spotlight>
         <div class="timeline-number">02</div>
         <h3>Build</h3>
         <p>Develop your professional identity: resume, LinkedIn and portfolio, with personal feedback.</p>
       </div>
 
       <!-- Step 3 -->
-      <div class="timeline-step">
+      <div class="timeline-step" data-spotlight>
         <div class="timeline-number">03</div>
         <h3>Practice</h3>
         <p>Live communication sessions, mock interviews and project guidance until you can perform under pressure.</p>
       </div>
 
       <!-- Step 4 -->
-      <div class="timeline-step">
+      <div class="timeline-step" data-spotlight>
         <div class="timeline-number">04</div>
         <h3>Grow</h3>
         <p>Book one-to-one industry mentor sessions when you need expert insight, and keep developing inside the community.</p>
@@ -2567,6 +2548,47 @@ const CONFIG = {
       step3.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   }
+})();
+</script>
+
+<script>
+(function autoSpotlight(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var STEP = 1800, RESUME = 3500;
+  var groups = Array.prototype.map.call(document.querySelectorAll('[data-spotlight-group]'), function(root){
+    return { root: root, items: Array.prototype.slice.call(root.querySelectorAll('[data-spotlight]')),
+             i: 0, timer: null, idle: null, visible: false, paused: false };
+  }).filter(function(g){ return g.items.length > 1; });
+  function setActive(g, idx){ g.items.forEach(function(el, k){ el.classList.toggle('is-active', k === idx); }); }
+  function clearActive(g){ g.items.forEach(function(el){ el.classList.remove('is-active'); }); }
+  function stop(g){ if (g.timer){ clearInterval(g.timer); g.timer = null; } }
+  function start(g){ if (g.timer || !g.visible || g.paused || document.hidden) return;
+    setActive(g, g.i); g.timer = setInterval(function(){ g.i = (g.i + 1) % g.items.length; setActive(g, g.i); }, STEP); }
+  function pause(g){ g.paused = true; stop(g); clearTimeout(g.idle); clearActive(g); }
+  function resumeLater(g){ clearTimeout(g.idle); g.idle = setTimeout(function(){ g.paused = false; start(g); }, RESUME); }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var g = groups.filter(function(x){ return x.root === e.target; })[0]; if (!g) return;
+      g.visible = e.isIntersecting;
+      if (g.visible) start(g); else { stop(g); clearActive(g); }
+    });
+  }, { threshold: 0.35 });
+  groups.forEach(function(g){
+    io.observe(g.root);
+    g.root.addEventListener('pointerenter', function(){ pause(g); }, { passive: true });
+    g.root.addEventListener('pointerleave', function(){ resumeLater(g); }, { passive: true });
+    g.root.addEventListener('focusin', function(){ pause(g); });
+    g.root.addEventListener('focusout', function(){ resumeLater(g); });
+    g.root.addEventListener('touchstart', function(ev){
+      pause(g);
+      var it = ev.target.closest('[data-spotlight]');
+      if (it){ g.i = g.items.indexOf(it); setActive(g, g.i); }
+    }, { passive: true });
+    g.root.addEventListener('touchend', function(){ resumeLater(g); }, { passive: true });
+  });
+  document.addEventListener('visibilitychange', function(){
+    groups.forEach(function(g){ if (document.hidden) stop(g); else start(g); });
+  });
 })();
 </script>
 
